@@ -35,6 +35,11 @@ function IntlPlugin(options) {
   var flattenOpts = depth ? {maxDepth: depth} : {};
 
   options.save = function(common) {
+    if (this.locale) {
+      commonWithLocale = {};
+      commonWithLocale[this.locale] = common;
+      common = commonWithLocale;
+    }
     return JSON.stringify(
       flattenLowness(lowness, common, flattenOpts)
     );
